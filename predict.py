@@ -1,9 +1,18 @@
 from ultralytics import YOLO
+from pathlib import Path
+import sys
 
-model = YOLO('/home/algorithm/chongqing/weights/solarpanel.pt')
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from config import SOLARPANEL_MODEL_PATH, PROJECT_ROOT
+
+model = YOLO(SOLARPANEL_MODEL_PATH)
 results = model.predict(
-    source='/home/algorithm/chongqing/data/2号门停车场',
-    project='/home/algorithm/chongqing/result/2号门停车场',
+    source=str(PROJECT_ROOT / 'data' / '2号门停车场'),
+    project=str(PROJECT_ROOT / 'result' / '2号门停车场'),
     name='photography',
     save=True,
     save_txt=False,

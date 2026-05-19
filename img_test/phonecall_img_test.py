@@ -31,8 +31,13 @@ FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]
 ALLROOT = FILE.parents[1]
 
+if str(ALLROOT) not in sys.path:
+    sys.path.insert(0, str(ALLROOT))
+
+from config import WEIGHTS_DIR
+
 # ResNet50分类模型路径
-RESNET_MODEL_PATH = "/home/algorithm/chongqing/resnet50_pose.pth"
+RESNET_MODEL_PATH = str(WEIGHTS_DIR / "resnet50_pose.pth")
 
 class ResNet50Classifier:
     """ResNet50分类器"""

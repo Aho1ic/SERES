@@ -5,10 +5,18 @@ import time
 import math
 import subprocess
 from multiprocessing import Process
+from pathlib import Path
 
 import cv2
 import numpy as np
 from ultralytics import YOLO
+
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from config import PHONECALL_MODEL_PATH
 
 def is_making_phone_call(keypoints):
     """
@@ -377,7 +385,7 @@ def main():
     parser = argparse.ArgumentParser(description='YOLOv8 打电话姿势检测 RTMP 推流')
     parser.add_argument('--video-source', required=True, help='输入视频流，如 rtmp://host/app/stream')
     parser.add_argument('--rtmp-url', required=True, help='输出 RTMP 推流地址')
-    parser.add_argument('--model-path', default='/home/algorithm/chongqing/weights/phonecall.pt', help='YOLO 模型权重路径')
+    parser.add_argument('--model-path', default=PHONECALL_MODEL_PATH, help='YOLO 模型权重路径')
     parser.add_argument('--conf', type=float, default=0.5, help='检测置信度阈值')
     args = parser.parse_args()
 

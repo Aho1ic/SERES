@@ -3,11 +3,19 @@ from flask import Flask, request, jsonify
 from pathlib import Path
 from loguru import logger
 import os
+import sys
+
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from config import UPLOAD_DIR
 
 app = Flask(__name__)
 
 # 设置保存目录
-SAVE_DIR = Path("/Users/macbook/Downloads/0514")
+SAVE_DIR = UPLOAD_DIR / "received"
 SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
 logger.info(f"文件接收服务启动，保存目录: {SAVE_DIR}")

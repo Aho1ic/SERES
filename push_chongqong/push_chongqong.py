@@ -3,14 +3,22 @@ import os
 import time
 import json
 from pathlib import Path
+import sys
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]
-RESULT_DIR = Path('/Users/macbook/Downloads/同步空间/funing/upload/helmet')
+ALLROOT = FILE.parents[1]
+for module_path in (ALLROOT, ROOT):
+    module_path_str = str(module_path)
+    if module_path_str not in sys.path:
+        sys.path.insert(0, module_path_str)
+
+from config import get_upload_url, get_auth_headers, UPLOAD_DIR
 
 
-def test_upload():
+def test_upload(box_id='20'):
     """测试上传接口 - 使用固定目录"""
+    RESULT_DIR = UPLOAD_DIR / 'helmet'
     os.makedirs(RESULT_DIR, exist_ok=True)
 
     files_to_upload = []
@@ -34,16 +42,11 @@ def test_upload():
 
     print(f"\n总共找到 {len(files_to_upload)} 个文件: {len(json_files)} JSON + {len(image_files)} 图片")
 
-    upload_url = 'http://10.60.73.189:9052/admin-api/aicallers/upload'
-    params = {'sysId': '11', 'boxId': '20','type':1}
-    headers = {
-        "AppKeyID": "28813140",
-        "AppKeySecret": "Rxaq46q8EAP5msGfnhBN"
-    }
+    upload_url = get_upload_url(sys_id=11, box_id=box_id, upload_type=1)
+    headers = get_auth_headers()
 
     print(f"\nAPI配置:")
     print(f"URL: {upload_url}")
-    print(f"参数: {params}")
     print(f"头部: {headers}")
 
     print("\n" + "=" * 50)

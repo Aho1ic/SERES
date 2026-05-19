@@ -9,17 +9,25 @@
 
 from pathlib import Path
 from typing import Dict, Optional, Set
+import sys
 
 import cv2
 from ultralytics import YOLO
 
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from config import PROJECT_ROOT, WEIGHTS_DIR
+
 # ===================== 配置区（按需修改） =====================
-MODEL_PATH = "/home/algorithm/yolo11s.pt"   # yolov8s 权重路径
+MODEL_PATH = str(WEIGHTS_DIR / "yolo11s.pt")   # yolov8s 权重路径
 INPUT_MODE = "image"                # "image" 或 "video"
 
 # 图片模式配置
-INPUT_DIR = "/home/algorithm/chongqing/aibox/jpg/"              # 输入图片文件夹
-OUTPUT_DIR = "/home/algorithm/chongqing/aibox/personcrops/"       # 输出裁剪图片文件夹（也用于视频模式）
+INPUT_DIR = str(PROJECT_ROOT / "data" / "jpg")              # 输入图片文件夹
+OUTPUT_DIR = str(PROJECT_ROOT / "output" / "personcrops")       # 输出裁剪图片文件夹（也用于视频模式）
 
 # 视频模式配置（可填本地视频路径、rtsp://、rtmp://、http:// 等）
 VIDEO_SOURCE = ""
