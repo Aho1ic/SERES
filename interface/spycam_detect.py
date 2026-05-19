@@ -41,7 +41,6 @@ class SpyCamInfer(AsyncVerificationMixin):
         self.running = Event()
         self.detection_thread = None
         self.model = None
-        self.track_model = None
         self.cap = None
         self.frame_count = 0
         self.frame_interval = 2
@@ -314,7 +313,6 @@ class SpyCamInfer(AsyncVerificationMixin):
         try:
             logger.debug(f"加载模型: {self.model_path}")
             self.model = YOLO(str(self.model_path)).cuda()
-            self.track_model = YOLO(str(self.model_path)).cuda()
             if isinstance(self.video_source, int):
                 logger.debug(f"连接摄像头ID: {self.video_source}")
                 self.cap = cv2.VideoCapture(self.video_source)
@@ -393,19 +391,24 @@ class SpyCamInfer(AsyncVerificationMixin):
                 
                 frame_process_start = time.perf_counter()
                 logger.debug(f"处理第 {self.frame_count} 帧")
-                results = self.model(frame, conf=0.5, verbose=False)
+
+                # 使用 track() 同时进行检测和追踪
                 tracked_objects = []
+                results = None
                 try:
-                    track_results = self.track_model.track(
+                    track_results = self.model.track(
                         source=frame,
                         conf=0.5,
                         persist=True,
                         tracker=self.tracker_config,
                         verbose=False
                     )
+                    results = track_results  # track 结果包含检测结果
                     tracked_objects = collect_tracked_objects(track_results)
                 except Exception as e:
-                    logger.error(f"目标追踪推理失败，本帧仍按检测结果上报，id使用本次上报序号: {e}", exc_info=True)
+                    logger.error(f"目标追踪推理失败，尝试仅检测: {e}", exc_info=True)
+                    # 如果追踪失败，回退到仅检测模式
+                    results = self.model(frame, conf=0.5, verbose=False)
                 
                 has_photo_pose = False
                 all_person_keypoints = []
@@ -504,8 +507,6 @@ class SpyCamInfer(AsyncVerificationMixin):
                 self.cap.release()
             if hasattr(self, 'model') and self.model:
                 del self.model
-            if hasattr(self, 'track_model') and self.track_model:
-                del self.track_model
             logger.info("拍照姿势检测已停止")
 
     def _process_verification_event(self, event):
