@@ -1,0 +1,21 @@
+# Core dependencies
+flask>=2.3.0
+requests>=2.28.0
+numpy>=1.24.0
+opencv-python>=4.8.0
+ultralytics>=8.0.0
+Pillow>=10.0.0
+
+# Logging
+loguru>=0.7.0
+
+# Optional: for VLLM client
+# openai>=1.0.0
+
+# Optional: for audio processing (omni module)
+# pyaudio>=0.2.13
+# dashscope>=1.10.0
+# websockets>=11.0
+
+# Development
+python-dotenv>=1.0.0

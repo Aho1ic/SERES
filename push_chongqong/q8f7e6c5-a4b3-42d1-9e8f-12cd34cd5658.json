@@ -1,0 +1,121 @@
+{
+    "event_id": "q8f7e6c5-a4b3-42d1-9e8f-12cd34cd5658",
+    "event_state": 0,
+    "device_name": "重庆无人机",
+    "device_id": "1961323481614520320",
+    "task_name": "打电话行为预警2号门",
+    "task_id": "1961323481614520320",
+    "app_name": "打电话行为预警2号门",
+    "app_id": "phoneCall",
+    "src_name": "2号门机场",
+    "src_id": "13a8db1f8f8383e384efd56797c4dcd2",
+    "created": 1758335880,
+    "picNum":2,
+    "details": [
+      {
+        "frame_id": 1458,
+        "metadata": {"max_lost_time": 3},
+        "model_id": "YOLO11",
+        "model_name": "phoneCall",
+        "model_thres": 0.2,
+        "model_type": 1,
+        "targets": [
+          {
+            "angle": 0,
+            "box": {
+              "left_top_x": 324,
+              "left_top_y": 256,
+              "right_bottom_x": 398,
+              "right_bottom_y": 512
+            },
+            "color": [255, 0, 0, 0],
+            "cross_label": "",
+            "id": 1,
+            "label": "phoneCall",
+            "prob": 0.89745,
+            "moving": true,
+            "ocr": "",
+            "region_label": "",
+            "roi_id": 0,
+            "reserved": ""
+          },
+          {
+            "angle": 0,
+            "box": {
+              "left_top_x": 456,
+              "left_top_y": 278,
+              "right_bottom_x": 532,
+              "right_bottom_y": 524
+            },
+            "color": [255, 0, 0, 0],
+            "cross_label": "",
+            "id": 2,
+            "label": "phoneCall",
+            "prob": 0.92345,
+            "moving": true,
+            "ocr": "",
+            "region_label": "",
+            "roi_id": 0,
+            "reserved": ""
+          },
+          {
+            "angle": 0,
+            "box": {
+              "left_top_x": 387,
+              "left_top_y": 290,
+              "right_bottom_x": 465,
+              "right_bottom_y": 535
+            },
+            "color": [255, 0, 0, 0],
+            "cross_label": "",
+            "id": 3,
+            "label": "phoneCall",
+            "prob": 0.87654,
+            "moving": true,
+            "ocr": "",
+            "region_label": "",
+            "roi_id": 0,
+            "reserved": ""
+          },
+          {
+            "angle": 0,
+            "box": {
+              "left_top_x": 512,
+              "left_top_y": 268,
+              "right_bottom_x": 598,
+              "right_bottom_y": 520
+            },
+            "color": [255, 0, 0, 0],
+            "cross_label": "",
+            "id": 4,
+            "label": "phoneCall",
+            "prob": 0.91234,
+            "moving": true,
+            "ocr": "",
+            "region_label": "",
+            "roi_id": 0,
+            "reserved": ""
+          },
+          {
+            "angle": 0,
+            "box": {
+              "left_top_x": 420,
+              "left_top_y": 275,
+              "right_bottom_x": 495,
+              "right_bottom_y": 528
+            },
+            "color": [255, 0, 0, 0],
+            "cross_label": "",
+            "id": 5,
+            "label": "phoneCall",
+            "prob": 0.88976,
+            "moving": true,
+            "ocr": "",
+            "region_label": "",
+            "roi_id": 0,
+            "reserved": ""
+          }
+        ]
+      }
+    ]
+  }

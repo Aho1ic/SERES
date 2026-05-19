@@ -1,0 +1,8 @@
+{
+    "boxId": "20",
+    "task_id": "1961323481614520320",
+    "status": "stream_error",
+    "task_name": "打电话行为预警2号门",
+    "categoryType": "phoneCall",
+    "video_url": "rtmp://10.60.73.189:1935/ly/1581F8HGX253E00A04A7"
+}
